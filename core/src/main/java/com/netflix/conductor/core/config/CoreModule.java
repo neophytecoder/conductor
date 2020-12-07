@@ -54,6 +54,9 @@ import com.netflix.conductor.core.execution.tasks.Wait;
 import com.netflix.conductor.core.utils.JsonUtils;
 import com.netflix.conductor.dao.MetadataDAO;
 
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+
 import static com.netflix.conductor.common.metadata.workflow.TaskType.TASK_TYPE_DECISION;
 import static com.netflix.conductor.common.metadata.workflow.TaskType.TASK_TYPE_DO_WHILE;
 import static com.netflix.conductor.common.metadata.workflow.TaskType.TASK_TYPE_DYNAMIC;
@@ -90,6 +93,7 @@ public class CoreModule extends AbstractModule {
         bind(Terminate.class).asEagerSingleton();
         bind(IsolatedTaskQueueProducer.class).asEagerSingleton();
         bind(SetVariable.class).asEagerSingleton();
+        bind(AWSCredentialsProvider.class).to(DefaultAWSCredentialsProviderChain.class);
     }
 
     @Provides
